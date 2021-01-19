@@ -1040,9 +1040,10 @@ int ppp_send_config(ppp_pcb *pcb, int mtu, u32_t accm, int pcomp, int accomp) {
  */
 int ppp_recv_config(ppp_pcb *pcb, int mru, u32_t accm, int pcomp, int accomp) {
   LWIP_UNUSED_ARG(mru);
+  LWIP_UNUSED_ARG(accm);
 
   if (pcb->link_cb->recv_config) {
-    pcb->link_cb->recv_config(pcb, pcb->link_ctx_cb, accm, pcomp, accomp);
+    pcb->link_cb->recv_config(pcb, pcb->link_ctx_cb, 0, pcomp, accomp);
   }
 
   PPPDEBUG(LOG_INFO, ("ppp_recv_config[%d]\n", pcb->netif->num));
